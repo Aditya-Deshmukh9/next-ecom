@@ -1,7 +1,12 @@
 import React from "react";
+import Signpage from "./auth/signup/page";
 
 function page() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <Signpage />
+    </div>
+  );
 }
 
 export default page;
