@@ -33,8 +33,9 @@ function Signpage() {
   } = useFormik({
     initialValues: { name: "", email: "", password: "" },
     validationSchema,
-    onSubmit: (values) => {
-      fetch("http://localhost:3000/api/users", {
+    onSubmit: async (values, action) => {
+      action.setSubmitting(true);
+      await fetch("/api/users", {
         method: "POST",
         body: JSON.stringify(values),
       }).then(async (res) => {
@@ -42,6 +43,7 @@ function Signpage() {
           const result = await res.json();
           console.log(result);
         }
+        action.setSubmitting(false);
       });
     },
   });
@@ -79,7 +81,11 @@ function Signpage() {
         onBlur={handleBlur}
         value-={password}
       />
-      <Button type="submit" className="w-full bg-blue-500 text-white">
+      <Button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full bg-blue-500 text-white"
+      >
         Sign up
       </Button>
       <div className="">
