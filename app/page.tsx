@@ -1,12 +1,5 @@
-import React from "react";
-import Signpage from "./auth/signup/page";
-
 function page() {
-  return (
-    <div>
-      <Signpage />
-    </div>
-  );
+  return <div>Home Page</div>;
 }
 
 export default page;
