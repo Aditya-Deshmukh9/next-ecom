@@ -37,8 +37,6 @@ export const POST = async (req: Request) => {
   });
 
   return NextResponse.json({
-    ok: true,
     message: "Please check your email!",
-    newUser,
   });
 };

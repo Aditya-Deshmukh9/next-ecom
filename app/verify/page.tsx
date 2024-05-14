@@ -1,6 +1,7 @@
 "use client";
 import { notFound, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 interface Props {
   searchParams: { token: string; userId: string };
@@ -21,11 +22,12 @@ export default function Verifypage(props: Props) {
 
       if (res.ok) {
         console.log(message);
+        toast.success(message);
         router.replace("/");
       }
 
       if (!res.ok && error) {
-        console.log(error);
+        toast.error(error);
       }
     });
   }, []);

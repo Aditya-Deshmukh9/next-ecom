@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { CircleX } from "lucide-react";
 import FormikFormErrors from "@/app/utils/Formikhelpers";
+import { toast } from "react-toastify";
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -40,8 +41,9 @@ function Signpage() {
         body: JSON.stringify(values),
       }).then(async (res) => {
         if (res.ok) {
-          const result = await res.json();
-          console.log(result);
+          const { message } = (await res.json()) as { message: string };
+          toast.success(message);
+          console.log(message);
         }
         action.setSubmitting(false);
       });
@@ -61,7 +63,7 @@ function Signpage() {
         name="name"
         onChange={handleChange}
         onBlur={handleBlur}
-        value-={name}
+        value={name}
       />
       <Input
         type="email"
@@ -70,7 +72,7 @@ function Signpage() {
         name="email"
         onChange={handleChange}
         onBlur={handleBlur}
-        value-={email}
+        value={email}
       />
       <Input
         type="password"
@@ -79,7 +81,7 @@ function Signpage() {
         name="password"
         onChange={handleChange}
         onBlur={handleBlur}
-        value-={password}
+        value={password}
       />
       <Button
         type="submit"
